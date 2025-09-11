@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahasha - Church Donations</title>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="./index.css" /> 
+</head>
+<body>
+    <div class="bg-overlay"></div>
+
+    <!-- Screen 1: Home/Search -->
+    <div class="screen active" id="screen-1">
+        <div class="container">
+            <div class="logo"></div>
+            <h1 class="title">Bahasha</h1>
+            <p class="subtitle">Give anywhere, anytime</p>
+            
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="church name or code"
+                    id="church-search"
+                >
+                <span class="search-icon">🔍</span>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 2: Donation Form -->
+    <div class="screen" id="screen-2">
+        <div class="container">
+            <div class="logo"></div>
+            <h1 class="title" id="selected-church">Zetech University</h1>
+            
+            <div class="form-container">
+                <form id="donation-form">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Tithe" name="tithe">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Offering" name="offering">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Evangelism" name="evangelism">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Local church budget" name="local_church_budget">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Church development" name="church_development">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Camp meeting offering" name="camp_meeting_offering">
+                    </div>
+                    
+                    <div class="expandable-section" onclick="toggleExpandable()">
+                        <span>Choose category options</span>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    
+                    <div class="expandable-content" id="expandable-content">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Additional category 1" name="additional_1">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Additional category 2" name="additional_2">
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="btn-container">
+                    <button class="btn btn-primary" onclick="goToScreen(3)">
+                        Next →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 3: Receipt Details -->
+    <div class="screen" id="screen-3">
+        <div class="container">
+            <div class="logo"></div>
+            <h1 class="title" id="receipt-church">Zetech University</h1>
+            
+            <div class="form-container">
+                <h3 style="margin-bottom: 1rem; color: #666;">Receipt summary</h3>
+                
+                <div class="receipt-summary" id="receipt-summary">
+                    <!-- Dynamic receipt content to be inserted here -->
+                </div>
+                
+                <h3 style="margin: 1.5rem 0 1rem; color: #666;">Receipt details</h3>
+                
+                <form id="receipt-form">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Full name" name="full_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select class="form-select" name="church_member" required>
+                            <option value="">Church member</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="M-Pesa number" name="mpesa_number" required>
+                    </div>
+                </form>
+                
+                <div class="btn-container">
+                    <button class="btn btn-primary" onclick="goToScreen(2)">← Back</button>
+                    <button class="btn btn-secondary" onclick="submitDonation()">
+                        Give
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 4: Thank You -->
+    <div class="screen" id="screen-4">
+        <div class="container">
+            <div class="logo"></div>
+            <h1 class="title" id="thankyou-church">Zetech University</h1>
+            <p class="thank-you-message">Thanks you for your giving</p>
+        </div>
+        
+        <div class="bottom-actions">
+            <button class="action-btn" onclick="startOver()" title="Start Over">
+                ↻
+            </button>
+            <button class="action-btn" onclick="reportIssue()" title="Report an Issue">
+                ⚠
+            </button>
+        </div>
+    </div>
+</body>
+</html>
