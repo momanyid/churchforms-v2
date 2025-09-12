@@ -24,7 +24,7 @@
                     placeholder="church name or code"
                     id="church-search"
                 >
-                <span class="search-icon">🔍</span>
+                <span class="search-icon">&#128269</span>
                 <div class="search-results" id="search-results"></div>
             </div>
         </div>
@@ -78,11 +78,8 @@
                 </form>
                 
                 <div class="btn-container">
-                    <!-- <button class="btn btn-primary" onclick="goToScreen(1)">
-                        ← Back
-                    </button> -->
                     <button class="btn btn-secondary" onclick="goToScreen(3)" id="next-btn">
-                        Next →
+                        <span>Next</span> <span>→</span>
                     </button>
                 </div>
             </div>
@@ -93,7 +90,7 @@
     <div class="screen" id="screen-3">
         <div class="container">
             <div class="logo"></div>
-            <h1 class="title" id="receipt-church">Zetech University</h1>
+            <h1 class="title" id="receipt-church" style="z-index: 10;">Zetech University</h1>
             
             <div class="form-container">
                 <h3 style="margin-bottom: 1rem; color: #666;">Receipt summary</h3>
@@ -123,9 +120,8 @@
                 </form>
                 
                 <div class="btn-container">
-                    <button class="btn btn-primary" onclick="goToScreen(2)">← Back</button>
                     <button class="btn btn-secondary" onclick="submitDonation()">
-                        Give →
+                        <span>Give</span> <span>→</span>
                     </button>
                 </div>
             </div>
@@ -142,10 +138,10 @@
         
         <div class="bottom-actions">
             <button class="action-btn" onclick="startOver()" title="Start Over">
-                ↻
+                ↻ <br>again
             </button>
             <button class="action-btn" onclick="reportIssue()" title="Report an Issue">
-                ⚠
+                Report an issue
             </button>
         </div>
     </div>

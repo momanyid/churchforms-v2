@@ -240,6 +240,11 @@ async function submitDonation(event) {
     submitBtn.innerHTML = '<div class="spinner"></div>';
     submitBtn.classList.add('loading');
 
+
+    goToScreen(4)
+    //******************************api stuff **************************** */
+
+    /* 
     try {
         const response = await fetch('https://cyberdevs.tech/api/v1', {
             method: 'POST',
@@ -250,7 +255,7 @@ async function submitDonation(event) {
         });
 
         //temporary disabling api fetch
-        if (!response.ok) {
+        if (response.ok) {
             goToScreen(4);
             clearStoredData();
         } else {
@@ -263,6 +268,7 @@ async function submitDonation(event) {
         submitBtn.innerHTML = originalText;
         submitBtn.classList.remove('loading');
     }
+    */
 }
 
 function startOver() {
