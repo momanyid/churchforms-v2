@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -10,12 +9,12 @@ body {
     background: linear-gradient(135deg, #d4a574 0%, #b8906d 50%, #8b6b47 100%);
     min-height: 100vh;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden; /* Only prevent horizontal scroll */
 }
 
 /* Background Image Placeholder */
 .bg-overlay {
-    position: absolute;
+    position: fixed; /* Changed from absolute to fixed */
     top: 0;
     left: 0;
     width: 100%;
@@ -35,19 +34,19 @@ body {
     color: white;
     position: relative;
     z-index: 1;
+    overflow-y: auto; /* Added vertical scroll */
+    max-height: 100vh; /* Added max height */
 }
 
 .screen.active {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: block; /* Changed from flex to block for better scrolling */
 }
 
 .container {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
+    padding-bottom: 2rem; /* Added bottom padding for better scroll experience */
 }
 
 .logo {
@@ -87,7 +86,7 @@ body {
 
 .search-input {
     width: 100%;
-    padding: 1rem 1.5rem;
+    padding: 1rem 3rem 1rem 1.5rem; /* Added right padding for icon */
     border: none;
     border-radius: 25px;
     font-size: 1rem;
@@ -107,6 +106,8 @@ body {
     transform: translateY(-50%);
     color: #999;
     cursor: pointer;
+    z-index: 10; /* Added z-index to keep it above results */
+    pointer-events: none; /* Made it non-interactive */
 }
 
 .search-results {
@@ -116,6 +117,8 @@ body {
     max-height: 200px;
     overflow-y: auto;
     display: none;
+    position: relative; /* Changed from absolute positioning issues */
+    z-index: 5;
 }
 
 .search-result {
@@ -141,6 +144,8 @@ body {
     margin: 2rem 0;
     backdrop-filter: blur(10px);
     color: #333;
+    max-height: calc(100vh - 200px); /* Added max height */
+    overflow-y: auto; /* Made form container scrollable */
 }
 
 .form-group {
@@ -237,6 +242,11 @@ body {
     gap: 1rem;
     margin-top: 2rem;
     justify-content: center;
+    position: sticky; /* Made buttons sticky */
+    bottom: 0;
+    background: inherit;
+    padding: 1rem 0;
+    margin-bottom: 0;
 }
 
 /* Receipt Styles */
@@ -246,6 +256,8 @@ body {
     padding: 1.5rem;
     margin: 1rem 0;
     backdrop-filter: blur(10px);
+    max-height: 300px; /* Added max height */
+    overflow-y: auto; /* Made receipt scrollable */
 }
 
 .receipt-row {
@@ -307,11 +319,13 @@ body {
     
     .screen {
         padding: 1rem 0.5rem;
+        padding-bottom: 3rem; /* Extra bottom padding on mobile */
     }
     
     .form-container {
         margin: 1rem 0;
         padding: 1.5rem 1rem;
+        max-height: calc(100vh - 150px); /* Adjusted for mobile */
     }
     
     .title {
@@ -336,10 +350,12 @@ body {
     
     .form-container {
         padding: 1rem 0.75rem;
+        max-height: calc(100vh - 120px); /* Further adjusted */
     }
     
     .screen {
         padding: 0.5rem 0.25rem;
+        padding-bottom: 3rem;
     }
 }
 
@@ -352,6 +368,7 @@ body {
     .form-container {
         max-width: none;
         margin: 1.5rem 0;
+        max-height: calc(100vh - 180px); /* Added max height for tablets */
     }
 }
 
@@ -365,6 +382,7 @@ body {
         max-width: none;
         margin: 2rem 0;
         padding: 3rem;
+        max-height: calc(100vh - 220px); /* Added max height for desktop */
     }
     
     .title {
@@ -395,4 +413,52 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Custom scrollbar styles for better UX */
+.form-container::-webkit-scrollbar,
+.receipt-summary::-webkit-scrollbar,
+.search-results::-webkit-scrollbar,
+.screen::-webkit-scrollbar {
+    width: 4px;
+}
+
+.form-container::-webkit-scrollbar-track,
+.receipt-summary::-webkit-scrollbar-track,
+.search-results::-webkit-scrollbar-track,
+.screen::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.form-container::-webkit-scrollbar-thumb,
+.receipt-summary::-webkit-scrollbar-thumb,
+.search-results::-webkit-scrollbar-thumb,
+.screen::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.3);
+    border-radius: 2px;
+}
+
+.form-container::-webkit-scrollbar-thumb:hover,
+.receipt-summary::-webkit-scrollbar-thumb:hover,
+.search-results::-webkit-scrollbar-thumb:hover,
+.screen::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0,0.5);
+}
+
+/* Force hardware acceleration for smooth scrolling */
+.screen, .form-container {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Additional mobile browser compatibility */
+html {
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    height: 100%;
+    position: fixed;
+    width: 100%;
 }

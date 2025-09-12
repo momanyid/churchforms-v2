@@ -1,4 +1,3 @@
-
 // Sample church data for search functionality
 const churches = [
     { name: "Zetech University", code: "ZETU001" },
@@ -16,12 +15,29 @@ const churches = [
 let currentScreen = 1;
 let selectedChurch = '';
 let donationData = {};
+let navigationHistory = [1];
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
     loadStoredData();
     setupSearchFunctionality();
+    setupBrowserNavigation();
+    setupFormValidation();
 });
+
+// Browser navigation support
+function setupBrowserNavigation() {
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function(event) {
+        if (event.state && event.state.screen) {
+            const targetScreen = event.state.screen;
+            goToScreenDirect(targetScreen);
+        }
+    });
+    
+    // Set initial state
+    history.replaceState({ screen: currentScreen }, '', '');
+}
 
 // Search functionality
 function setupSearchFunctionality() {
@@ -58,6 +74,42 @@ function setupSearchFunctionality() {
     });
 }
 
+// Form validation for screen 2
+function setupFormValidation() {
+    const donationForm = document.getElementById('donation-form');
+    const nextBtn = document.getElementById('next-btn');
+    
+    if (donationForm && nextBtn) {
+        const inputs = donationForm.querySelectorAll('input[type="number"], input[type="text"]');
+        
+        function validateForm() {
+            let hasValue = false;
+            inputs.forEach(input => {
+                if (input.value && input.value.trim() !== '') {
+                    hasValue = true;
+                }
+            });
+            
+            if (hasValue) {
+                nextBtn.style.display = 'inline-flex';
+                nextBtn.disabled = false;
+            } else {
+                nextBtn.style.display = 'none';
+                nextBtn.disabled = true;
+            }
+        }
+        
+        // Initially hide the next button
+        nextBtn.style.display = 'none';
+        nextBtn.disabled = true;
+        
+        inputs.forEach(input => {
+            input.addEventListener('input', validateForm);
+            input.addEventListener('change', validateForm);
+        });
+    }
+}
+
 function selectChurch(churchName) {
     selectedChurch = churchName;
     document.getElementById('church-search').value = churchName;
@@ -75,6 +127,17 @@ function selectChurch(churchName) {
 }
 
 function goToScreen(screenNumber) {
+    // Add to navigation history
+    if (screenNumber !== currentScreen) {
+        navigationHistory.push(screenNumber);
+        // Add to browser history
+        history.pushState({ screen: screenNumber }, '', '');
+    }
+    
+    goToScreenDirect(screenNumber);
+}
+
+function goToScreenDirect(screenNumber) {
     // Hide current screen
     document.querySelector('.screen.active').classList.remove('active');
     
@@ -88,8 +151,16 @@ function goToScreen(screenNumber) {
         generateReceiptSummary();
     }
     
+    // Re-setup form validation when going to screen 2
+    if (screenNumber === 2) {
+        setTimeout(setupFormValidation, 100);
+    }
+    
     // Store current screen
     storeData();
+    
+    // Scroll to top of new screen
+    document.getElementById(`screen-${screenNumber}`).scrollTop = 0;
 }
 
 function generateReceiptSummary() {
@@ -115,6 +186,15 @@ function generateReceiptSummary() {
         }
     }
     
+    if (summaryHTML === '') {
+        summaryHTML = `
+            <div class="receipt-row">
+                <span>No donations entered</span>
+                <span>KES 0.00</span>
+            </div>
+        `;
+    }
+    
     summaryHTML += `
         <div class="receipt-row">
             <span>Total</span>
@@ -133,6 +213,9 @@ function toggleExpandable() {
     content.classList.toggle('expanded');
     icon.classList.toggle('rotated');
     icon.textContent = content.classList.contains('expanded') ? '−' : '+';
+    
+    // Re-validate form after expanding/collapsing
+    setTimeout(setupFormValidation, 100);
 }
 
 async function submitDonation() {
@@ -150,6 +233,13 @@ async function submitDonation() {
     
     if (!isValid) {
         alert('Please fill in all required fields');
+        return;
+    }
+    
+    // Check if there are any donations
+    if (!donationData.total || donationData.total === 0) {
+        alert('Please add at least one donation amount');
+        goToScreen(2);
         return;
     }
     
@@ -200,30 +290,43 @@ function startOver() {
     currentScreen = 1;
     selectedChurch = '';
     donationData = {};
+    navigationHistory = [1];
     
     // Reset forms
     document.getElementById('donation-form').reset();
     document.getElementById('receipt-form').reset();
     document.getElementById('church-search').value = '';
     
+    // Reset expandable sections
+    const expandableContent = document.getElementById('expandable-content');
+    const expandIcon = document.querySelector('.expand-icon');
+    if (expandableContent && expandIcon) {
+        expandableContent.classList.remove('expanded');
+        expandIcon.classList.remove('rotated');
+        expandIcon.textContent = '+';
+    }
+    
     // Go to first screen
     document.querySelector('.screen.active').classList.remove('active');
     document.getElementById('screen-1').classList.add('active');
+    
+    // Reset browser history
+    history.replaceState({ screen: 1 }, '', '');
 }
 
 function reportIssue() {
     alert('Issue reporting functionality would be implemented here. Please contact support at support@bahasha.com');
 }
 
-// Local storage functions
+// Local storage functions (using memory instead of localStorage)
 function storeData() {
     const data = {
         currentScreen,
         selectedChurch,
         donationData,
+        navigationHistory,
         timestamp: Date.now()
     };
-    // Using a simple variable instead of localStorage as requested
     window.appData = data;
 }
 
@@ -233,6 +336,7 @@ function loadStoredData() {
         currentScreen = data.currentScreen;
         selectedChurch = data.selectedChurch;
         donationData = data.donationData;
+        navigationHistory = data.navigationHistory || [1];
         
         if (selectedChurch) {
             document.getElementById('selected-church').textContent = selectedChurch;
@@ -251,5 +355,26 @@ function loadStoredData() {
 
 function clearStoredData() {
     window.appData = null;
-    
 }
+
+// Handle touch events for better mobile experience
+document.addEventListener('touchstart', function() {}, { passive: true });
+document.addEventListener('touchmove', function() {}, { passive: true });
+
+// Prevent zoom on double tap for better UX
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+// Force repaint on orientation change for mobile browsers
+window.addEventListener('orientationchange', function() {
+    setTimeout(function() {
+        window.scrollTo(0, 1);
+        window.scrollTo(0, 0);
+    }, 500);
+});

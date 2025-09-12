@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Bahasha - Church Donations</title>
     <script src="./index.js"></script>
     <link rel="stylesheet" href="./index.css" /> 
@@ -39,27 +39,27 @@
             <div class="form-container">
                 <form id="donation-form">
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Tithe" name="tithe">
+                        <input type="number" class="form-input" placeholder="Tithe" name="tithe">
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Offering" name="offering">
+                        <input type="number" class="form-input" placeholder="Offering" name="offering">
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Evangelism" name="evangelism">
+                        <input type="number" class="form-input" placeholder="Evangelism" name="evangelism">
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Local church budget" name="local_church_budget">
+                        <input type="number" class="form-input" placeholder="Local church budget" name="local_church_budget">
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Church development" name="church_development">
+                        <input type="number" class="form-input" placeholder="Church development" name="church_development">
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Camp meeting offering" name="camp_meeting_offering">
+                        <input type="number" class="form-input" placeholder="Camp meeting offering" name="camp_meeting_offering">
                     </div>
                     
                     <div class="expandable-section" onclick="toggleExpandable()">
@@ -78,7 +78,10 @@
                 </form>
                 
                 <div class="btn-container">
-                    <button class="btn btn-primary" onclick="goToScreen(3)">
+                    <button class="btn btn-primary" onclick="goToScreen(1)">
+                        ← Back
+                    </button>
+                    <button class="btn btn-secondary" onclick="goToScreen(3)" id="next-btn">
                         Next →
                     </button>
                 </div>
@@ -122,7 +125,7 @@
                 <div class="btn-container">
                     <button class="btn btn-primary" onclick="goToScreen(2)">← Back</button>
                     <button class="btn btn-secondary" onclick="submitDonation()">
-                        Give
+                        Give →
                     </button>
                 </div>
             </div>
