@@ -146,11 +146,11 @@ body {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 35px;
     padding: 2rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
     backdrop-filter: blur(10px);
     color: #333;
     max-height: calc(100vh - 200px); /* Added max height */
-    overflow-y: auto; /* Made form container scrollable */
+    overflow-y: auto;
 }
 
 .form-group {
@@ -217,7 +217,8 @@ body {
 /* Button Styles */
 .btn {
     display: flex;
-    flex: 1;
+    flex-direction: row;
+    /* flex: 2; */
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
@@ -246,6 +247,7 @@ body {
 .btn-secondary {
     background: rgb(250,250,250);
     color: #b8906d;
+
 }
 
 .btn-secondary:hover {

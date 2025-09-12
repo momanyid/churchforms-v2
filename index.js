@@ -301,7 +301,7 @@ function startOver() {
 }
 
 function reportIssue() {
-    alert('Issue reporting functionality would be implemented here. Please contact support at support@bahasha.com');
+    alert('Issue reporting functionality would be implemented soon. Please contact support at momanyimdavid@gmail.com');
 }
 
 // Local storage functions (using memory instead of localStorage)
