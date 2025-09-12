@@ -23,6 +23,13 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSearchFunctionality();
     setupBrowserNavigation();
     setupFormValidation();
+
+    // Check hash on load
+    const hash = window.location.hash;
+    if (hash && /^#screen\d+$/.test(hash)) {
+        const screenNum = parseInt(hash.replace('#screen', ''), 10);
+        goToScreenDirect(screenNum);
+    }
 });
 
 // Browser navigation support
@@ -34,9 +41,18 @@ function setupBrowserNavigation() {
             goToScreenDirect(targetScreen);
         }
     });
-    
+
+    // Handle manual hash change in URL
+    window.addEventListener('hashchange', () => {
+        const hash = window.location.hash;
+        if (hash && /^#screen\d+$/.test(hash)) {
+            const screenNum = parseInt(hash.replace('#screen', ''), 10);
+            goToScreenDirect(screenNum);
+        }
+    });
+
     // Set initial state
-    history.replaceState({ screen: currentScreen }, '', '');
+    history.replaceState({ screen: currentScreen }, '', `#screen${currentScreen}`);
 }
 
 // Search functionality
@@ -51,13 +67,13 @@ function setupSearchFunctionality() {
             return;
         }
 
-        const filtered = churches.filter(church => 
-            church.name.toLowerCase().includes(query) || 
+        const filtered = churches.filter(church =>
+            church.name.toLowerCase().includes(query) ||
             church.code.toLowerCase().includes(query)
         );
 
         if (filtered.length > 0) {
-            searchResults.innerHTML = filtered.map(church => 
+            searchResults.innerHTML = filtered.map(church =>
                 `<div class="search-result" onclick="selectChurch('${church.name}')">${church.name}</div>`
             ).join('');
             searchResults.style.display = 'block';
@@ -74,52 +90,16 @@ function setupSearchFunctionality() {
     });
 }
 
-// Form validation for screen 2
-function setupFormValidation() {
-    const donationForm = document.getElementById('donation-form');
-    const nextBtn = document.getElementById('next-btn');
-    
-    if (donationForm && nextBtn) {
-        const inputs = donationForm.querySelectorAll('input[type="number"], input[type="text"]');
-        
-        function validateForm() {
-            let hasValue = false;
-            inputs.forEach(input => {
-                if (input.value && input.value.trim() !== '') {
-                    hasValue = true;
-                }
-            });
-            
-            if (hasValue) {
-                nextBtn.style.display = 'inline-flex';
-                nextBtn.disabled = false;
-            } else {
-                nextBtn.style.display = 'none';
-                nextBtn.disabled = true;
-            }
-        }
-        
-        // Initially hide the next button
-        nextBtn.style.display = 'none';
-        nextBtn.disabled = true;
-        
-        inputs.forEach(input => {
-            input.addEventListener('input', validateForm);
-            input.addEventListener('change', validateForm);
-        });
-    }
-}
-
 function selectChurch(churchName) {
     selectedChurch = churchName;
     document.getElementById('church-search').value = churchName;
     document.getElementById('search-results').style.display = 'none';
-    
+
     // Update church name in subsequent screens
     document.getElementById('selected-church').textContent = churchName;
     document.getElementById('receipt-church').textContent = churchName;
     document.getElementById('thankyou-church').textContent = churchName;
-    
+
     // Automatically go to next screen after selection
     setTimeout(() => {
         goToScreen(2);
@@ -127,50 +107,49 @@ function selectChurch(churchName) {
 }
 
 function goToScreen(screenNumber) {
-    // Add to navigation history
     if (screenNumber !== currentScreen) {
         navigationHistory.push(screenNumber);
-        // Add to browser history
-        history.pushState({ screen: screenNumber }, '', '');
+        // Push state with hash in URL
+        history.pushState({ screen: screenNumber }, '', `#screen${screenNumber}`);
     }
-    
     goToScreenDirect(screenNumber);
 }
 
 function goToScreenDirect(screenNumber) {
     // Hide current screen
-    document.querySelector('.screen.active').classList.remove('active');
-    
+    const activeScreen = document.querySelector('.screen.active');
+    if (activeScreen) activeScreen.classList.remove('active');
+
     // Show target screen
-    document.getElementById(`screen-${screenNumber}`).classList.add('active');
-    
-    currentScreen = screenNumber;
-    
-    // Special handling for screen 3 (receipt)
-    if (screenNumber === 3) {
-        generateReceiptSummary();
+    const target = document.getElementById(`screen-${screenNumber}`);
+    if (target) {
+        target.classList.add('active');
+        currentScreen = screenNumber;
+
+        // Handle special cases
+        if (screenNumber === 3) {
+            generateReceiptSummary();
+        }
+        if (screenNumber === 2) {
+            setTimeout(setupFormValidation, 100);
+        }
+
+        // Store state
+        storeData();
+
+        // Scroll to top of new screen
+        target.scrollTop = 0;
     }
-    
-    // Re-setup form validation when going to screen 2
-    if (screenNumber === 2) {
-        setTimeout(setupFormValidation, 100);
-    }
-    
-    // Store current screen
-    storeData();
-    
-    // Scroll to top of new screen
-    document.getElementById(`screen-${screenNumber}`).scrollTop = 0;
 }
 
 function generateReceiptSummary() {
     const form = document.getElementById('donation-form');
     const formData = new FormData(form);
     const summary = document.getElementById('receipt-summary');
-    
+
     let total = 0;
     let summaryHTML = '';
-    
+
     for (let [key, value] of formData.entries()) {
         if (value && value.trim() !== '') {
             const amount = parseFloat(value) || 0;
@@ -185,7 +164,7 @@ function generateReceiptSummary() {
             donationData[key] = value;
         }
     }
-    
+
     if (summaryHTML === '') {
         summaryHTML = `
             <div class="receipt-row">
@@ -194,14 +173,14 @@ function generateReceiptSummary() {
             </div>
         `;
     }
-    
+
     summaryHTML += `
         <div class="receipt-row">
             <span>Total</span>
             <span>KES ${total.toFixed(2)}</span>
         </div>
     `;
-    
+
     summary.innerHTML = summaryHTML;
     donationData.total = total;
 }
@@ -209,19 +188,19 @@ function generateReceiptSummary() {
 function toggleExpandable() {
     const content = document.getElementById('expandable-content');
     const icon = document.querySelector('.expand-icon');
-    
+
     content.classList.toggle('expanded');
     icon.classList.toggle('rotated');
     icon.textContent = content.classList.contains('expanded') ? '−' : '+';
-    
+
     // Re-validate form after expanding/collapsing
     setTimeout(setupFormValidation, 100);
 }
 
-async function submitDonation() {
+async function submitDonation(event) {
     const receiptForm = document.getElementById('receipt-form');
     const formData = new FormData(receiptForm);
-    
+
     // Validate required fields
     let isValid = true;
     for (let [key, value] of formData.entries()) {
@@ -230,19 +209,19 @@ async function submitDonation() {
             break;
         }
     }
-    
+
     if (!isValid) {
         alert('Please fill in all required fields');
         return;
     }
-    
+
     // Check if there are any donations
     if (!donationData.total || donationData.total === 0) {
         alert('Please add at least one donation amount');
         goToScreen(2);
         return;
     }
-    
+
     // Prepare final data
     const finalData = {
         church: selectedChurch,
@@ -254,13 +233,13 @@ async function submitDonation() {
         },
         timestamp: new Date().toISOString()
     };
-    
+
     // Show loading state
     const submitBtn = event.target;
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<div class="spinner"></div>';
     submitBtn.classList.add('loading');
-    
+
     try {
         const response = await fetch('https://cyberdevs.tech/api/v1', {
             method: 'POST',
@@ -269,8 +248,9 @@ async function submitDonation() {
             },
             body: JSON.stringify(finalData)
         });
-        
-        if (response.ok) {
+
+        //temporary disabling api fetch
+        if (!response.ok) {
             goToScreen(4);
             clearStoredData();
         } else {
@@ -291,12 +271,12 @@ function startOver() {
     selectedChurch = '';
     donationData = {};
     navigationHistory = [1];
-    
+
     // Reset forms
     document.getElementById('donation-form').reset();
     document.getElementById('receipt-form').reset();
     document.getElementById('church-search').value = '';
-    
+
     // Reset expandable sections
     const expandableContent = document.getElementById('expandable-content');
     const expandIcon = document.querySelector('.expand-icon');
@@ -305,13 +285,13 @@ function startOver() {
         expandIcon.classList.remove('rotated');
         expandIcon.textContent = '+';
     }
-    
+
     // Go to first screen
     document.querySelector('.screen.active').classList.remove('active');
     document.getElementById('screen-1').classList.add('active');
-    
+
     // Reset browser history
-    history.replaceState({ screen: 1 }, '', '');
+    history.replaceState({ screen: 1 }, '', '#screen1');
 }
 
 function reportIssue() {
@@ -337,14 +317,14 @@ function loadStoredData() {
         selectedChurch = data.selectedChurch;
         donationData = data.donationData;
         navigationHistory = data.navigationHistory || [1];
-        
+
         if (selectedChurch) {
             document.getElementById('selected-church').textContent = selectedChurch;
             document.getElementById('receipt-church').textContent = selectedChurch;
             document.getElementById('thankyou-church').textContent = selectedChurch;
             document.getElementById('church-search').value = selectedChurch;
         }
-        
+
         // Go to stored screen
         if (currentScreen !== 1) {
             document.querySelector('.screen.active').classList.remove('active');
