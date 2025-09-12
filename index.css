@@ -158,14 +158,9 @@ body {
 }
 #screen-3 {
     background: rgb(255, 255, 255);
-    opacity: 100%;
     top: 0px;
     width: 100%;
-    z-index: -10;
-}
-
-#screen3.title {
-    z-index: 10;
+    color: black;
 }
 
 .form-label {
@@ -271,11 +266,23 @@ body {
 }
 
 /* Receipt Styles */
-.receipt-summary {
+.receipt-header {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 1.5rem;
-    margin: 1rem 0;
+    max-height: 300px; /* Added max height */
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    margin: 0 1.5rem;
+    font-style: italic;
+    font-weight: bold;
+}
+.receipt-summary {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 0 1.5rem;
+    margin: 0.2rem 0 0 0;
     backdrop-filter: blur(10px);
     max-height: 300px; /* Added max height */
     overflow-y: auto; /* Made receipt scrollable */
@@ -284,7 +291,7 @@ body {
 .receipt-row {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;
+    padding: 0.2rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
