@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Bahasha - Church Donations</title>
+    <title>Bahasha</title>
     <script src="./index.js"></script>
     <link rel="stylesheet" href="./index.css" /> 
 </head>
@@ -39,27 +39,27 @@
             <div class="form-container">
                 <form id="donation-form">
                     <div class="form-group">
-                        <input type="number" class="form-input" placeholder="Tithe" name="tithe">
+                        <input type="text" inputmode="numeric" class="form-input" placeholder="Tithe" name="tithe">
                     </div>
                     
                     <div class="form-group">
-                        <input type="number" class="form-input" placeholder="Offering" name="offering">
+                        <input type="text" inputmode="numeric" class="form-input" placeholder="Offering" name="offering">
                     </div>
                     
                     <div class="form-group">
-                        <input type="number" class="form-input" placeholder="Evangelism" name="evangelism">
+                        <input type="text" inputmode="numeric" class="form-input" placeholder="Evangelism" name="evangelism">
                     </div>
                     
                     <div class="form-group">
-                        <input type="number" class="form-input" placeholder="Local church budget" name="local_church_budget">
+                        <input type="text" inputmode="numeric" class="form-input" placeholder="Local church budget" name="local_church_budget">
                     </div>
                     
                     <div class="form-group">
-                        <input type="number" class="form-input" placeholder="Church development" name="church_development">
+                        <input type="text" inputmode="numeric" class="form-input" placeholder="Church development" name="church_development">
                     </div>
                     
                     <div class="form-group">
-                        <input type="number" class="form-input" placeholder="Camp meeting offering" name="camp_meeting_offering">
+                        <input type="text" inputmode="numeric" class="form-input" placeholder="Camp meeting offering" name="camp_meeting_offering">
                     </div>
                     
                     <div class="expandable-section" onclick="toggleExpandable()">
@@ -69,13 +69,13 @@
                     
                     <div class="expandable-content" id="expandable-content">
                         <div class="form-group">
-                            <input type="number" class="form-input" name="Children" placeholder="Children">
-                            <input type="number" class="form-input" name="Youth" placeholder="Youth">
-                            <input type="number" class="form-input" name="AEMR" placeholder="AEMR">
-                            <input type="number" class="form-input" name="Welfare" placeholder="Welfare">
-                            <input type="number" class="form-input" name="campexpenses" placeholder="Camp Expenses">
-                            <input type="number" class="form-input" name="youthkitty" placeholder="Youth Kitty">
-                            <input type="number" class="form-input" name="choirkitty" placeholder="Choir Kitty">
+                            <input type="text" inputmode="numeric" class="form-input" name="Children" placeholder="Children">
+                            <input type="text" inputmode="numeric" class="form-input" name="Youth" placeholder="Youth">
+                            <input type="text" inputmode="numeric" class="form-input" name="AEMR" placeholder="AEMR">
+                            <input type="text" inputmode="numeric" class="form-input" name="Welfare" placeholder="Welfare">
+                            <input type="text" inputmode="numeric" class="form-input" name="campexpenses" placeholder="Camp Expenses">
+                            <input type="text" inputmode="numeric" class="form-input" name="youthkitty" placeholder="Youth Kitty">
+                            <input type="text" inputmode="numeric" class="form-input" name="choirkitty" placeholder="Choir Kitty">
                         </div>
                     </div>
                 </form>
@@ -96,36 +96,40 @@
             <h1 class="title" id="receipt-church">Zetech University</h1>
             
             <div class="form-container">
-                <h3 style="margin-bottom: 1rem; color: #666;">Receipt summary</h3>
-                
-                <div class="receipt-header">
-                        <span>Contribution Category</span>
-                        <span>Amount</span>
+                <div class="receipt-page">
+                    <h3 style="margin-bottom: 1rem; color: #666;">Receipt summary</h3>
+                    
+                    <div class="receipt-header">
+                            <span>Category</span>
+                            <span>Amount</span>
+                        </div>
+                    <div class="receipt-summary" id="receipt-summary">
+                        <!-- Dynamic receipt content to be inserted here -->
+                        
                     </div>
-                <div class="receipt-summary" id="receipt-summary">
-                    <!-- Dynamic receipt content to be inserted here -->
-                     
                 </div>
-                
-                <h3 style="margin: 1.5rem 0 1rem; color: #666;">Receipt details</h3>
-                
-                <form id="receipt-form">
-                    <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Full name" name="full_name" required>
-                    </div>
+
+                <div class="receipt-page">    
+                    <h3 style="margin: 1.5rem 0 1rem; color: #666;">Receipt details</h3>
                     
-                    <div class="form-group">
-                        <select class="form-select" name="church_member" required>
-                            <option value="">Church member</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-input" placeholder="M-Pesa number" name="mpesa_number" required>
-                    </div>
-                </form>
+                    <form id="receipt-form">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Full name" name="full_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select class="form-select" name="church_member" required>
+                                <option value="">Church member</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="M-Pesa number" name="mpesa_number" required>
+                        </div>
+                    </form>
+                </div>
                 
                 <div class="btn-container">
                     <button class="btn btn-secondary" onclick="submitDonation()">
@@ -141,7 +145,7 @@
         <div class="container">
             <div class="logo"></div>
             <h1 class="title" id="thankyou-church">Zetech University</h1>
-            <p class="thank-you-message">Thanks you for your giving</p>
+            <p class="thank-you-message">Thank you for your giving</p>
         </div>
         
         <div class="bottom-actions">

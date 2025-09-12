@@ -17,12 +17,12 @@ body {
     position: fixed; /* Changed from absolute to fixed */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('placeholder-sunset-hands.jpg');
+    width: 100vw;
+    height: 100vh;
+    background-image: url('background-image.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.3;
+    opacity: 1;
     z-index: -1;
 }
 
@@ -42,6 +42,13 @@ body {
     bottom: 50px;
 }
 
+#screen-3 .form-container {
+    display: flex;
+    flex-direction: column;
+    column-gap: 1rem;
+    
+}
+
 .screen.active {
     display: block; /* Changed from flex to block for better scrolling */
 }
@@ -56,7 +63,7 @@ body {
 .logo {
     width: 80px;
     height: 80px;
-    background: white;
+    /* background: white; */
     border-radius: 8px;
     margin: 0 auto 1rem;
     display: flex;
@@ -65,13 +72,13 @@ body {
 }
 
 .logo::before {
-    mask-image: url("https://whatsapp-form-one.vercel.app/assets/adventist-en-centered--forest.svg");
+    /* mask-image: url("https://whatsapp-form-one.vercel.app/assets/adventist-en-centered--forest.svg"); */
     /* content: '⛪'; */
     /* font-size: 20px; */
 }
 
 .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     text-align: center;
     margin-bottom: 0.5rem;
@@ -245,7 +252,7 @@ body {
 }
 
 .btn-secondary {
-    background: rgb(250,250,250);
+    background: none;
     color: #b8906d;
 
 }
@@ -260,11 +267,12 @@ body {
     gap: 1rem;
     margin-top: 2rem;
     justify-content: center;
-    position: sticky; /* Made buttons sticky */
+    position: relative; /* Made buttons sticky */
     bottom: 0;
     background: inherit;
     padding: 1rem 0;
     margin-bottom: 0;
+    background: none;
 }
 
 /* Receipt Styles */
@@ -342,7 +350,7 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .container {
         padding: 0;
         max-width: 100%;
@@ -350,13 +358,13 @@ body {
     
     .screen {
         padding: 1rem 0.5rem;
-        padding-bottom: 3rem; /* Extra bottom padding on mobile */
+        padding-bottom: 3rem; 
     }
     
     .form-container {
         margin: 1rem 0;
         padding: 1.5rem 1rem;
-        max-height: calc(100vh - 150px); /* Adjusted for mobile */
+        max-height: calc(100vh - 150px); 
     }
     
     .title {
@@ -381,7 +389,7 @@ body {
     
     .form-container {
         padding: 1rem 0.75rem;
-        max-height: calc(100vh - 120px); /* Further adjusted */
+        max-height: calc(100vh - 120px);
     }
     
     .screen {
@@ -399,7 +407,7 @@ body {
     .form-container {
         max-width: none;
         margin: 1.5rem 0;
-        max-height: calc(100vh - 180px); /* Added max height for tablets */
+        max-height: calc(100vh - 180px);
     }
 }
 
@@ -413,7 +421,7 @@ body {
         max-width: none;
         margin: 2rem 0;
         padding: 3rem;
-        max-height: calc(100vh - 220px); /* Added max height for desktop */
+        max-height: calc(100vh - 220px); 
     }
     
     .title {
@@ -426,7 +434,7 @@ body {
     }
 }
 
-/* Loading state */
+/* Loading state 
 .loading {
     opacity: 0.6;
     pointer-events: none;
@@ -446,7 +454,7 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* Custom scrollbar styles for better UX */
+/* Custom scrollbar styles for better UX 
 .form-container::-webkit-scrollbar,
 .receipt-summary::-webkit-scrollbar,
 .search-results::-webkit-scrollbar,
@@ -476,11 +484,11 @@ body {
     background: rgba(0,0,0,0.5);
 }
 
-/* Force hardware acceleration for smooth scrolling */
+/* Force hardware acceleration for smooth scrolling 
 .screen, .form-container {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
-}
+} */
 
 /* Additional mobile browser compatibility */
 html {
