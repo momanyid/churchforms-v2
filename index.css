@@ -19,11 +19,21 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('background-image.jpg');
+    background-image: image-set(
+        url('assets/images/drawable-mdpi/Mask\ Group\ 1.png') 1x,
+        url('assets/images/drawable-hdpi/Mask\ Group\ 1.png') 1.5x,
+        url('assets/images/drawable-xhdpi/Mask\ Group\ 1.png') 2x,
+        url('assets/images/drawable-xxhdpi/Mask\ Group\ 1.png') 2.5x,
+        url('assets/images/drawable-xxxhdpi/Mask\ Group\ 1.png') 4x
+    );
     background-size: cover;
     background-position: center;
+    max-width: calc(100vw-2rem);
     opacity: 1;
-    z-index: -1;
+    z-index: -2;
+}
+@media screen {
+    
 }
 
 /* Common Styles */
@@ -86,7 +96,7 @@ body {
 
 .search-container {
     position: relative;
-    margin: 0 5% 2rem;
+    margin: 0 6% 2rem;
 }
 
 .search-input {
@@ -111,8 +121,13 @@ body {
     transform: translateY(-50%);
     color: #999;
     cursor: pointer;
+    width: 18.35dp;
+    height: 18dp;
     z-index: 10; /* Added z-index to keep it above results */
     pointer-events: none; /* Made it non-interactive */
+}
+.search-container input{
+    font-style: italic;
 }
 
 .search-results {
@@ -351,148 +366,6 @@ body {
     opacity: 0.9;
 }
 
-/* Responsive Design */
-/* @media (max-width: 480px) {
-    .container {
-        padding: 0;
-        max-width: 100%;
-    }
-    
-    .screen {
-        padding: 1rem 0.5rem;
-        padding-bottom: 3rem; 
-    }
-    
-    .form-container {
-        margin: 1rem 0;
-        padding: 1.5rem 1rem;
-        max-height: calc(100vh - 150px); 
-    }
-    
-    .title {
-        font-size: 1.8rem;
-    }
-    
-    .btn-container {
-        flex-direction: row;
-        align-items: center;
-    }
-    
-    .btn {
-        width: 100%;
-        max-width: 200px;
-    }
-}
-
-@media (max-width: 360px) {
-    .title {
-        font-size: 1.6rem;
-    }
-    
-    .form-container {
-        padding: 1rem 0.75rem;
-        max-height: calc(100vh - 120px);
-    }
-    
-    .screen {
-        padding: 0.5rem 0.25rem;
-        padding-bottom: 3rem;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    .container {
-        max-width: 90%;
-        padding: 1rem;
-    }
-    
-    .form-container {
-        max-width: none;
-        margin: 1.5rem 0;
-        max-height: calc(100vh - 180px);
-    }
-}
-
-@media (min-width: 769px) {
-    .container {
-        max-width: 600px;
-        padding: 2rem;
-    }
-    
-    .form-container {
-        max-width: none;
-        margin: 2rem 0;
-        padding: 3rem;
-        max-height: calc(100vh - 220px); 
-    }
-    
-    .title {
-        font-size: 2.5rem;
-    }
-    
-    .btn {
-        padding: 1.25rem 2.5rem;
-        font-size: 1.1rem;
-    }
-}
-
-/* Loading state 
-.loading {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.spinner {
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 50%;
-    border-top: 2px solid white;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Custom scrollbar styles for better UX 
-.form-container::-webkit-scrollbar,
-.receipt-summary::-webkit-scrollbar,
-.search-results::-webkit-scrollbar,
-.screen::-webkit-scrollbar {
-    width: 4px;
-}
-
-.form-container::-webkit-scrollbar-track,
-.receipt-summary::-webkit-scrollbar-track,
-.search-results::-webkit-scrollbar-track,
-.screen::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.form-container::-webkit-scrollbar-thumb,
-.receipt-summary::-webkit-scrollbar-thumb,
-.search-results::-webkit-scrollbar-thumb,
-.screen::-webkit-scrollbar-thumb {
-    background: rgba(0,0,0,0.3);
-    border-radius: 2px;
-}
-
-.form-container::-webkit-scrollbar-thumb:hover,
-.receipt-summary::-webkit-scrollbar-thumb:hover,
-.search-results::-webkit-scrollbar-thumb:hover,
-.screen::-webkit-scrollbar-thumb:hover {
-    background: rgba(0,0,0,0.5);
-}
-
-/* Force hardware acceleration for smooth scrolling 
-.screen, .form-container {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-} */
-
-/* Additional mobile browser compatibility */
 html {
     height: 100%;
     -webkit-overflow-scrolling: touch;
@@ -503,3 +376,7 @@ body {
     position: fixed;
     width: 100%;
 }
+
+/* #screen1 .title {
+    top: calc((275/915)*100vh)
+} */
