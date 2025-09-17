@@ -22,9 +22,9 @@ body {
     background-image: image-set(
         url('assets/images/drawable-mdpi/Mask\ Group\ 1.png') 1x,
         url('assets/images/drawable-hdpi/Mask\ Group\ 1.png') 4x,
-        /* url('assets/images/drawable-xhdpi/Mask\ Group\ 1.png') 2x,
+        url('assets/images/drawable-xhdpi/Mask\ Group\ 1.png') 2x,
         url('assets/images/drawable-xxhdpi/Mask\ Group\ 1.png') 2.5x,
-        url('assets/images/drawable-xxxhdpi/Mask\ Group\ 1.png') 4x */
+        url('assets/images/drawable-xxxhdpi/Mask\ Group\ 1.png') 4x
     );
     background-size: cover;
     background-position: center;
