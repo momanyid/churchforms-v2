@@ -48,36 +48,32 @@ body {
     max-height: 100vh; /* Added max height */
 }
 
-#screen-4{
-    bottom: 50px;
-}
-
 .screen.active {
-    display: block; /* Changed from flex to block for better scrolling */
+    display: block;
 }
 
 .container {
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding-bottom: 2rem; /* Added bottom padding for better scroll experience */
+    max-width: 600px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo {
     width: 80px;
     height: 80px;
-    /* background: white; */
-    border-radius: 8px;
+    background: none;
+    background-image: url('./assets/logos/adventist-symbol-tm--black.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     margin: 0 auto 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.logo::before {
-    /* mask-image: url("https://whatsapp-form-one.vercel.app/assets/adventist-en-centered--forest.svg"); */
-    /* content: '⛪'; */
-    /* font-size: 20px; */
+    object-fit: contain;
 }
 
 .title {
@@ -159,7 +155,9 @@ body {
 /* Form Styles */
 .form-container {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 35px;
+    border-radius: 0px;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
     padding: 2rem;
     margin: 5rem 0 -100% 0;
     backdrop-filter: blur(10px);
@@ -180,7 +178,7 @@ body {
 }
 
 #screen-3 .form-container{
-    top: -100%;
+    top: 20%;
 }
 
 .form-label {
@@ -192,7 +190,7 @@ body {
 
 .form-input, .form-select {
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0 0.3rem 0;
     border: none;
     border-bottom: 2px solid #ddd;
     background: transparent;
@@ -377,6 +375,7 @@ body {
     width: 100%;
 }
 
-/* #screen1 .title {
-    top: calc((275/915)*100vh)
-} */
+#screen-4 button{
+    background: none;
+    opacity: 100%;
+}
