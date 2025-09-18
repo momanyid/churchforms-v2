@@ -32,15 +32,12 @@ body {
     opacity: 1;
     z-index: -2;
 }
-@media screen {
-    
-}
 
 /* Common Styles */
 .screen {
     display: none;
     min-height: 100vh;
-    padding: 2rem 0;
+    padding: 0 0;
     color: white;
     position: relative;
     z-index: 1;
@@ -86,6 +83,7 @@ body {
     text-align: center;
     margin-bottom: 0.5rem;
     color: black;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 #screen-1 .logo {
     opacity: 0;
@@ -279,7 +277,7 @@ body {
 .btn-container {
     display: block;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
     justify-content: center;
     position: relative; /* Made buttons sticky */
     bottom: 0;
@@ -293,20 +291,32 @@ body {
 /*Screen 3*/
 #screen-3 {
     background: rgb(255, 255, 255);
+
 }
 
 #screen-3 .form-container{
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    max-height: none;
+    min-height: 80vh;
+    
+}
+.receipt-page {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     justify-content: space-between;
     top:0;
     bottom:0;
     margin-bottom: 0;
     margin-top: 0;
-    height: 100vh;
+    height: 70vh;
 }
 
+#screen-3 .screen {
+    margin: 0;
+    padding: 0;
+}
 
 /* Receipt Styles */
 .receipt-header {

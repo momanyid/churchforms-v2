@@ -97,40 +97,41 @@
             
             <div class="form-container">
                 <div class="receipt-page">
-                    <span style="margin-bottom: 1rem; color: #111;">Receipt summary</span>
-                    
-                    <div class="receipt-header">
-                            <span>Category</span>
-                            <span>Amount</span>
-                        </div>
-                    <div class="receipt-summary" id="receipt-summary">
-                        <!-- Dynamic receipt content to be inserted here -->
+                    <div>
+                        <span style="margin-bottom: 1rem; color: #111;">Receipt summary</span>
                         
+                        <div class="receipt-header">
+                                <span>Category</span>
+                                <span>Amount</span>
+                            </div>
+                        <div class="receipt-summary" id="receipt-summary">
+                            <!-- Dynamic receipt content to be inserted here -->
+                            
+                        </div>
+                    </div>
+
+                    <div>    
+                        <span style="margin: 1.5rem 0 1rem; color: #111;">Receipt details</span>
+                        
+                        <form id="receipt-form">
+                            <div class="form-group">
+                                <input type="text" class="form-input" placeholder="Full name" name="full_name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <select class="form-select" name="church_member" required>
+                                    <option value="">Church member</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" class="form-input" placeholder="M-Pesa number" name="mpesa_number" required>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <div class="receipt-page">    
-                    <span style="margin: 1.5rem 0 1rem; color: #111;">Receipt details</span>
-                    
-                    <form id="receipt-form">
-                        <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Full name" name="full_name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <select class="form-select" name="church_member" required>
-                                <option value="">Church member</option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" class="form-input" placeholder="M-Pesa number" name="mpesa_number" required>
-                        </div>
-                    </form>
-                </div>
-                
                 <div class="btn-container">
                     <button class="btn btn-secondary" onclick="goToScreen(4)">
                         <span>Give</span> <span>→</span>
