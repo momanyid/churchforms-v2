@@ -168,15 +168,18 @@ body {
     border-top-left-radius: 35px;
     border-top-right-radius: 35px;
     padding: 2rem;
+    padding-bottom: 0;
     margin: 5rem 0 -100% 0;
     backdrop-filter: blur(10px);
     color: #333;
     max-height: calc(100vh - 200px); /* Added max height */
     overflow-y: auto;
+    max-height: 100vh;
+    min-height: 80vh;
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 
@@ -298,7 +301,8 @@ body {
     margin-bottom: 0;
     margin-top: 0;
     padding-bottom: 0;
-    max-height: none;
+    padding-top: 0;
+    max-height: 100vh;
     min-height: 80vh;
     
 }
