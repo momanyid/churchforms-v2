@@ -40,45 +40,61 @@
             
             <div class="form-container">
                 <form id="donation-form">
-                    <div class="form-group">
-                        <input type="text" inputmode="numeric" class="form-input" placeholder="Tithe" name="tithe">
+                    <!-- Main form content -->
+                    <div class="main-form-content" id="main-form-content">
+                        <div class="form-group">
+                            <input type="text" inputmode="numeric" class="form-input" placeholder="Tithe" name="tithe">
+                        </div>                       
+                        <div class="form-group">
+                            <input type="text" inputmode="numeric" class="form-input" placeholder="Offering" name="offering">
+                        </div>                       
+                        <div class="form-group">
+                            <input type="text" inputmode="numeric" class="form-input" placeholder="Evangelism" name="evangelism">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" inputmode="numeric" class="form-input" placeholder="Local church budget" name="local_church_budget">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" inputmode="numeric" class="form-input" placeholder="Church development" name="church_development">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" inputmode="numeric" class="form-input" placeholder="Camp meeting offering" name="camp_meeting_offering">
+                        </div>
                     </div>
                     
-                    <div class="form-group">
-                        <input type="text" inputmode="numeric" class="form-input" placeholder="Offering" name="offering">
-                    </div>
+                   
                     
-                    <div class="form-group">
-                        <input type="text" inputmode="numeric" class="form-input" placeholder="Evangelism" name="evangelism">
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" inputmode="numeric" class="form-input" placeholder="Local church budget" name="local_church_budget">
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" inputmode="numeric" class="form-input" placeholder="Church development" name="church_development">
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" inputmode="numeric" class="form-input" placeholder="Camp meeting offering" name="camp_meeting_offering">
-                    </div>
-                    
-                    <div class="expandable-section" onclick="toggleExpandable()">
-                        <span><i>Choose category options</i></span>
-                        <span class="expand-icon">+</span>
-                    </div>
-                    
+                    <!-- Expandable content -->
                     <div class="expandable-content" id="expandable-content">
                         <div class="form-group">
                             <input type="text" inputmode="numeric" class="form-input" name="Children" placeholder="Children">
+                        </div>
+                        <div class="form-group">
                             <input type="text" inputmode="numeric" class="form-input" name="Youth" placeholder="Youth">
+                        </div>
+                        <div class="form-group">
                             <input type="text" inputmode="numeric" class="form-input" name="AEMR" placeholder="AEMR">
+                        </div>
+                        <div class="form-group">
                             <input type="text" inputmode="numeric" class="form-input" name="Welfare" placeholder="Welfare">
+                        </div>
+                        <div class="form-group">
                             <input type="text" inputmode="numeric" class="form-input" name="campexpenses" placeholder="Camp Expenses">
+                        </div>
+                        <div class="form-group">
                             <input type="text" inputmode="numeric" class="form-input" name="youthkitty" placeholder="Youth Kitty">
+                        </div>
+                        <div class="form-group">
                             <input type="text" inputmode="numeric" class="form-input" name="choirkitty" placeholder="Choir Kitty">
                         </div>
+                    </div>
+
+                     <div class="expandable-section" onclick="toggleExpandable()">
+                        <span><i>More category options</i></span>
+                        <span class="expand-icon">^</span>
                     </div>
                 </form>
                 
@@ -108,7 +124,6 @@
                             </div>
                         <div class="receipt-summary" id="receipt-summary">
                             <!-- Dynamic receipt content to be inserted here -->
-                            
                         </div>
                     </div>
 

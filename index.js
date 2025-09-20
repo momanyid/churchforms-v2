@@ -188,13 +188,46 @@ function generateReceiptSummary() {
 function toggleExpandable() {
     const content = document.getElementById('expandable-content');
     const icon = document.querySelector('.expand-icon');
+    const mainContent = document.getElementById('main-form-content');
+    const formContainer = document.querySelector('#screen-2 .form-container');
 
-    content.classList.toggle('expanded');
-    icon.classList.toggle('rotated');
-    icon.textContent = content.classList.contains('expanded') ? '−' : '+';
+    const isExpanded = content.classList.contains('expanded');
+    
+    if (!isExpanded) {
+        // Show additional categories
+        mainContent.classList.add('hidden');
+        content.classList.add('expanded');
+        icon.classList.add('rotated');
+        
+        // Scroll to top of form container smoothly
+        setTimeout(() => {
+            formContainer.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }, 100);
+        
+    } else {
+        // Show main categories
+        content.classList.remove('expanded');
+        mainContent.classList.remove('hidden');
+        icon.classList.remove('rotated');
+        
+        // Scroll to top of form container smoothly
+        setTimeout(() => {
+            formContainer.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }, 100);
+    }
 
     // Re-validate form after expanding/collapsing
     setTimeout(setupFormValidation, 100);
+}
+
+function setupFormValidation() {
+    // Add any form validation logic here
 }
 
 async function submitDonation(event) {
@@ -240,35 +273,7 @@ async function submitDonation(event) {
     submitBtn.innerHTML = '<div class="spinner"></div>';
     submitBtn.classList.add('loading');
 
-
-    goToScreen(4)
-    //******************************api stuff **************************** */
-
-    /* 
-    try {
-        const response = await fetch('https://cyberdevs.tech/api/v1', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(finalData)
-        });
-
-        //temporary disabling api fetch
-        if (response.ok) {
-            goToScreen(4);
-            clearStoredData();
-        } else {
-            throw new Error('Submission failed');
-        }
-    } catch (error) {
-        console.error('Error submitting donation:', error);
-        alert('There was an error submitting your donation. Please try again.');
-    } finally {
-        submitBtn.innerHTML = originalText;
-        submitBtn.classList.remove('loading');
-    }
-    */
+    goToScreen(4);
 }
 
 function startOver() {
@@ -286,10 +291,12 @@ function startOver() {
     // Reset expandable sections
     const expandableContent = document.getElementById('expandable-content');
     const expandIcon = document.querySelector('.expand-icon');
-    if (expandableContent && expandIcon) {
+    const mainContent = document.getElementById('main-form-content');
+    
+    if (expandableContent && expandIcon && mainContent) {
         expandableContent.classList.remove('expanded');
+        mainContent.classList.remove('hidden');
         expandIcon.classList.remove('rotated');
-        expandIcon.textContent = '+';
     }
 
     // Go to first screen

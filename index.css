@@ -9,31 +9,22 @@ body {
     background: linear-gradient(135deg, #d4a574 0%, #b8906d 50%, #8b6b47 100%);
     min-height: 100vh;
     position: relative;
-    overflow-x: hidden; /* Only prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
-/* Background Image Placeholder */
 .bg-overlay {
-    position: fixed; /* Changed from absolute to fixed */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: image-set(
-        url('assets/images/drawable-mdpi/Mask\ Group\ 1.png') 1x,
-        url('assets/images/drawable-hdpi/Mask\ Group\ 1.png') 4x,
-        url('assets/images/drawable-xhdpi/Mask\ Group\ 1.png') 2x,
-        url('assets/images/drawable-xxhdpi/Mask\ Group\ 1.png') 2.5x,
-        url('assets/images/drawable-xxxhdpi/Mask\ Group\ 1.png') 4x
-    );
+    background: url('assets/images/drawable-hdpi/Mask\ Group\ 1.png');
     background-size: cover;
     background-position: center;
-    max-width: calc(100vw-2rem);
     opacity: 1;
     z-index: -2;
 }
 
-/* Common Styles */
 .screen {
     display: none;
     min-height: 100vh;
@@ -41,8 +32,8 @@ body {
     color: white;
     position: relative;
     z-index: 1;
-    overflow-y: auto; /* Added vertical scroll */
-    max-height: 100vh; /* Added max height */
+    overflow-y: auto;
+    max-height: 100vh;
 }
 
 .screen.active {
@@ -76,7 +67,6 @@ body {
     object-fit: contain;
 }
 
-
 .title {
     font-size: 1.5rem;
     font-weight: 300;
@@ -85,9 +75,11 @@ body {
     color: black;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+
 #screen-1 .logo {
     opacity: 0;
 }
+
 #screen-1 .title {
     color: white;
 }
@@ -106,7 +98,7 @@ body {
 
 .search-input {
     width: 100%;
-    padding: 1rem 3rem 1rem 1.5rem; /* Added right padding for icon */
+    padding: 1rem 3rem 1rem 1.5rem;
     border: none;
     border-radius: 25px;
     font-size: 1rem;
@@ -126,11 +118,12 @@ body {
     transform: translateY(-50%);
     color: #999;
     cursor: pointer;
-    width: 18.35dp;
-    height: 18dp;
-    z-index: 10; /* Added z-index to keep it above results */
-    pointer-events: none; /* Made it non-interactive */
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    pointer-events: none;
 }
+
 .search-container input{
     font-style: italic;
 }
@@ -142,7 +135,7 @@ body {
     max-height: 200px;
     overflow-y: auto;
     display: none;
-    position: relative; /* Changed from absolute positioning issues */
+    position: relative;
     z-index: 5;
 }
 
@@ -172,7 +165,7 @@ body {
     margin: 5rem 0 -100% 0;
     backdrop-filter: blur(10px);
     color: #333;
-    max-height: calc(100vh - 200px); /* Added max height */
+    max-height: calc(100vh - 200px);
     overflow-y: auto;
     max-height: 100vh;
     min-height: 80vh;
@@ -180,14 +173,6 @@ body {
 
 .form-group {
     margin-bottom: 1.2rem;
-}
-
-
-.form-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #666;
 }
 
 .form-input, .form-select {
@@ -218,23 +203,41 @@ body {
     padding: 1rem 0;
     border-bottom: 2px solid #ddd;
     color: #666;
+    margin-bottom: 1.2rem;
 }
 
 .expand-icon {
-    transition: transform 0.3s;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform ease-out;
+    animation:ease-in-out;
 }
 
 .expand-icon.rotated {
-    transform: rotate(45deg);
+    transform: rotate(180deg);
+}
+
+/* Hide main form content when expanded */
+.main-form-content {
+    transition: all 0.3s ease;
+}
+
+.main-form-content.hidden {
+    display: none;
 }
 
 .expandable-content {
     display: none;
-    padding: 1rem 0 0;
+    animation: fadeIn 0.3s ease;
 }
 
 .expandable-content.expanded {
     display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Button Styles */
@@ -269,7 +272,6 @@ body {
 .btn-secondary {
     background: none;
     color: #b8906d;
-
 }
 
 .btn-secondary:hover {
@@ -282,7 +284,7 @@ body {
     gap: 1rem;
     margin-top: 0.5rem;
     justify-content: center;
-    position: relative; /* Made buttons sticky */
+    position: relative;
     bottom: 0;
     background: inherit;
     padding: 1rem 0;
@@ -290,11 +292,9 @@ body {
     background: none;
 }
 
-
 /*Screen 3*/
 #screen-3 {
     background: rgb(255, 255, 255);
-
 }
 
 #screen-3 .form-container{
@@ -304,8 +304,8 @@ body {
     padding-top: 0;
     max-height: 100vh;
     min-height: 80vh;
-    
 }
+
 .receipt-page {
     display: flex;
     flex-direction: column;
@@ -322,11 +322,10 @@ body {
     padding: 0;
 }
 
-/* Receipt Styles */
 .receipt-header {
     background: rgba(255, 255, 255, 0.1);
     padding: 1.5rem;
-    max-height: 300px; /* Added max height */
+    max-height: 300px;
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0;
@@ -334,14 +333,15 @@ body {
     font-style: italic;
     border-bottom: 2px solid #ddd;
 }
+
 .receipt-summary {
     background: rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding: 0;
     margin: 0.2rem 0 0 0;
     backdrop-filter: blur(10px);
-    max-height: 300px; /* Added max height */
-    overflow-y: auto; /* Made receipt scrollable */
+    max-height: 300px;
+    overflow-y: auto;
     font-style: italic;
     color: #666;
 }
@@ -353,12 +353,6 @@ body {
     border-bottom: 2px solid #ddd;
 }
 
-.receipt-row:last-child {
-    /* border-bottom: none; */
-    /* font-weight: bold; */
-}
-
-/* Bottom Actions */
 .bottom-actions {
     position: fixed;
     bottom: 4rem;
