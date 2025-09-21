@@ -210,9 +210,11 @@ body {
 }
 
 .expand-icon {
+    line-height: 1;
     font-size: 1.2rem;
     font-weight: bold;
     transition: transform ease-out;
+    padding-top: 10px;
     animation:ease-in-out;
 }
 
@@ -262,24 +264,14 @@ body {
 }
 
 .btn-primary {
-    background: rgba(255, 255, 255, 0.2);
+    background: none;
     color: white;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-.btn-primary:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
 .btn-secondary {
     background: none;
     color: #b8906d;
-}
-
-.btn-secondary:hover {
-    background: #a6825f;
-    color: white;
 }
 
 .btn-container {
@@ -380,10 +372,6 @@ body {
     justify-content: center;
     font-size: 1.2rem;
     transition: all 0.3s;
-}
-
-.action-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
 }
 
 .thank-you-message {
