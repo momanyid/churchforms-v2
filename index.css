@@ -76,6 +76,14 @@ body {
     color: black;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+
+.screen-2-img {
+    position: absolute;
+    width: 18.35px;
+    height: 18px;
+    top: 20px;
+    right:62px;
+}
 #screen-3 .title {
     margin-bottom: 0.3rem;
 }
@@ -161,17 +169,20 @@ body {
 /* Form Styles */
 .form-container {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 0px;
     border-top-left-radius: 35px;
     border-top-right-radius: 35px;
     padding: 2rem;
-    backdrop-filter: blur(10px);
+    padding-bottom: 0;
+    bottom: 0;
+    margin-bottom: 0;
     color: #333;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     margin-top: auto; /* Push to bottom */
     min-height: 60vh; /* Minimum height */
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .form-group {
@@ -214,7 +225,6 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     transition: transform ease-out;
-    padding-top: 10px;
     animation:ease-in-out;
 }
 
@@ -251,7 +261,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0 0 0;
+    padding: 0;
     border: none;
     border-radius: 10px;
     font-size: 1rem;
@@ -266,8 +276,6 @@ body {
 .btn-primary {
     background: none;
     color: white;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 .btn-secondary {
     background: none;
@@ -280,11 +288,16 @@ body {
     margin-top: 0.5rem;
     justify-content: center;
     position: relative;
+    position: sticky;
     bottom: 0;
-    background: inherit;
-    padding: 1rem 0;
+    padding: 1rem 0 3rem 0;
     margin-bottom: 0;
-    background: none;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+#screen-2 .btn-container {
+    padding-bottom: 4.5rem;
+    background-color: rgba(255, 255, 255, 1.95);
 }
 
 /*Screen 3*/
@@ -293,24 +306,13 @@ body {
 }
 
 #screen-3 .form-container{
-    margin-bottom: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-top: 0;
-    max-height: 100vh;
-    min-height: 80vh;
-}
-
-#screen-3 .form-container {
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
     flex: 1;
     top:0;
-    bottom:0;
-    margin-bottom: 0;
-    margin-top: 0;
     height: 100%;
+    margin-top: 1rem; /* Minimal space after title */
+    min-height: calc(100vh - 180px); /* Account for logo + title space */
+    max-height: calc(100vh - 180px);
 }
 
 #screen-3 .screen {
@@ -394,7 +396,7 @@ body {
 }
 
 #screen-2 .form-container {
-    margin-top: 2rem; /* Space from title */
+    margin-top: auto; /* Space from title */
 }
 
 #screen-2 form {
@@ -402,12 +404,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-#screen-2 .btn-container {
-    margin-top: auto;
-    padding: 1rem 0 2rem 0;
-}
-
 
 #screen-3 {
     background: rgb(255, 255, 255);
@@ -417,20 +413,11 @@ body {
     padding-top: 0.5rem; /* Push logo/title closer to top */
 }
 
-#screen-3 .form-container {
-    margin-top: 1rem; /* Minimal space after title */
-    margin-bottom: 0;
-    padding-bottom: 0;
-    min-height: calc(100vh - 180px); /* Account for logo + title space */
-    max-height: calc(100vh - 180px);
-}
-
 #screen-3 .receipt-summary {
     flex-grow: 1;
     max-height: none; /* Remove height restriction */
     overflow-y: auto;
 }
-
 
 #screen-4 .container {
     justify-content: flex-start;
