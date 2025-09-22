@@ -105,7 +105,7 @@ body {
 
 .search-container {
     position: relative;
-    margin: 0 6% 2rem;
+    margin: 0 6% 1rem;
 }
 
 .search-input {
@@ -133,7 +133,7 @@ body {
     width: 18px;
     height: 18px;
     z-index: 10;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .search-container input{
@@ -143,7 +143,7 @@ body {
 .search-results {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
-    margin-top: 1rem;
+    margin: 0 1rem;
     max-height: 200px;
     overflow-y: auto;
     display: none;
@@ -292,17 +292,16 @@ body {
     bottom: 0;
     padding: 1rem 0 3rem 0;
     margin-bottom: 0;
-    background-color: rgba(255, 255, 255, 0.95);
 }
 
 #screen-2 .btn-container {
     padding-bottom: 4.5rem;
-    background-color: rgba(255, 255, 255, 1.95);
+    background-color: #f2f2f2;
 }
 
 /*Screen 3*/
 #screen-3 {
-    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 #screen-3 .form-container{
